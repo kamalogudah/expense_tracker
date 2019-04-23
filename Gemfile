@@ -9,4 +9,6 @@ gem "rspec"
 gem "coderay"
 gem "rack-test"
 gem "sinatra"
+gem 'sequel'
+gem 'sqlite3'
 
