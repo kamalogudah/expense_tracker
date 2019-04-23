@@ -11,6 +11,9 @@ module ExpenseTracker
     end
 
     let(:ledger) { instance_double("ExpenseTracker::Ledger") }
+    let(:response_body) {
+      last_response.body
+    }
 
     describe "POST /expenses" do
       context "when the expense is successfully recorded" do
@@ -22,7 +25,7 @@ module ExpenseTracker
         end
         it "returns the expense id" do
           post "/expenses", JSON.generate(expense)
-          parsed = JSON.parse(last_response.body)
+          parsed = JSON.parse(response_body)
           expect(parsed).to include("expense_id" => 417)
         end
         it "responds with a 200 (OK)" do
@@ -40,7 +43,7 @@ module ExpenseTracker
         end
         it "returns an error message" do
           post "/expenses", JSON.generate(expense)
-          parsed = JSON.parse(last_response.body)
+          parsed = JSON.parse(response_body)
           expect(parsed).to include("error" => "Expense incomplete")
         end
         it "responds with a 422 (Unprocessable enity" do
