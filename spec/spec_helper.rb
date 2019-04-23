@@ -45,6 +45,9 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.filter_gems_from_backtrace "rack", "rack-test", "sequel", "sinatra"
+  config.when_first_matching_example_defined(:db) do
+    require_relative "./support/db"
+  end
 
   # The settings below are suggested to provide a good initial experience
   # with RSpec, but feel free to customize to your heart's content.
